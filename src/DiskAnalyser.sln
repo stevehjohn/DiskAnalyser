@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiskAnalyser", "DiskAnalyser\DiskAnalyser.csproj", "{374541C8-0F75-412C-BCC4-C618DAFAAD2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{374541C8-0F75-412C-BCC4-C618DAFAAD2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374541C8-0F75-412C-BCC4-C618DAFAAD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374541C8-0F75-412C-BCC4-C618DAFAAD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374541C8-0F75-412C-BCC4-C618DAFAAD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31C97FE2-B629-40E8-9A77-97DEC522E114}
+	EndGlobalSection
+EndGlobal
