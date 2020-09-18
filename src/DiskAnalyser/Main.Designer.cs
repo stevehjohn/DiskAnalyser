@@ -138,6 +138,7 @@
             this.mainTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTree.ImageIndex = 0;
             this.mainTree.ImageList = this.treeImages;
+            this.mainTree.ItemHeight = 18;
             this.mainTree.Location = new System.Drawing.Point(0, 0);
             this.mainTree.Name = "mainTree";
             this.mainTree.SelectedImageIndex = 0;

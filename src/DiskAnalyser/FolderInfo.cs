@@ -8,6 +8,8 @@ namespace DiskAnalyser
 
         public long Size { get; set; }
 
+        public long TotalSize { get; set; }
+
         public List<FolderInfo> Children { get; }
 
         public FolderInfo()

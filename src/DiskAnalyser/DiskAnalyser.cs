@@ -25,6 +25,15 @@ namespace DiskAnalyser
         {
             var directoryInfo = new DirectoryInfo(node.Name);
 
+            try
+            {
+                node.Size = directoryInfo.EnumerateFiles("*", SearchOption.TopDirectoryOnly).Sum(f => f.Length);
+            }
+            catch
+            {
+                //
+            }
+
             IEnumerable<DirectoryInfo> folders;
 
             try

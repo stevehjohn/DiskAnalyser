@@ -35,6 +35,8 @@ namespace DiskAnalyser
 
             progressBar.Visible = false;
 
+            _analysisNode.Tag = _diskAnalyser.Root;
+
             foreach (var child in _diskAnalyser.Root.Children)
             {
                 var newNode = _analysisNode.Nodes.Add(GetDirectoryName(child.Name));
