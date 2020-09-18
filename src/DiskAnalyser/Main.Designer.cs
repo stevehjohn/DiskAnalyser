@@ -28,6 +28,9 @@
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.mainTree = new System.Windows.Forms.TreeView();
             this.treeImages = new System.Windows.Forms.ImageList(this.components);
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.mainStatus.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
@@ -36,6 +39,9 @@
             // 
             // mainStatus
             // 
+            this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel,
+            this.progressBar});
             this.mainStatus.Location = new System.Drawing.Point(0, 428);
             this.mainStatus.Name = "mainStatus";
             this.mainStatus.Size = new System.Drawing.Size(800, 22);
@@ -64,7 +70,7 @@
             // analyseToolStripMenuItem
             // 
             this.analyseToolStripMenuItem.Name = "analyseToolStripMenuItem";
-            this.analyseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.analyseToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.analyseToolStripMenuItem.Text = "&Analyse...";
             this.analyseToolStripMenuItem.Click += new System.EventHandler(this.AnalyseToolStripMenuItem_Click);
             // 
@@ -133,6 +139,19 @@
             this.treeImages.Images.SetKeyName(0, "hdd.ico");
             this.treeImages.Images.SetKeyName(1, "folder.ico");
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // progressBar
+            // 
+            this.progressBar.AutoSize = false;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +164,8 @@
             this.MainMenuStrip = this.mainMenu;
             this.Name = "Main";
             this.Text = "Disk Analyser";
+            this.mainStatus.ResumeLayout(false);
+            this.mainStatus.PerformLayout();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.mainSplit.Panel1.ResumeLayout(false);
@@ -166,5 +187,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.TreeView mainTree;
         private System.Windows.Forms.ImageList treeImages;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }

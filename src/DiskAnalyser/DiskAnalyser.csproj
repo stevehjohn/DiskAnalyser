@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DiskAnalyser.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="FolderInfo.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

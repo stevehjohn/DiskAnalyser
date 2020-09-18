@@ -1,19 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DiskAnalyser
 {
     public class DiskAnalyser
     {
-        private readonly CancellationTokenSource _cancellationTokenSource;
-        private Task _analyseTask;
-
-        public DiskAnalyser()
-        {
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
+        public FolderInfo Root { get; private set; }
 
         public string[] GetDrives()
         {
@@ -22,13 +16,37 @@ namespace DiskAnalyser
 
         public void Analyse(string drive)
         {
-            var token = _cancellationTokenSource.Token;
+            Root = new FolderInfo { Name = $"\\\\?\\{drive}" };
 
-            _analyseTask = Task.Run(() => DoAnalysis(drive), token);
+            AnalyseNode(Root);
         }
 
-        private void DoAnalysis(string drive)
+        private static void AnalyseNode(FolderInfo node)
         {
+            var directoryInfo = new DirectoryInfo(node.Name);
+
+            IEnumerable<DirectoryInfo> folders;
+
+            try
+            {
+                folders = directoryInfo.EnumerateDirectories("*", SearchOption.TopDirectoryOnly);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return;
+            }
+
+            foreach (var folder in folders)
+            {
+                if ((folder.Attributes & FileAttributes.ReparsePoint) == 0)
+                {
+                    var child = new FolderInfo { Name = folder.FullName };
+
+                    node.Children.Add(child);
+
+                    AnalyseNode(child);
+                }
+            }
         }
     }
 }
