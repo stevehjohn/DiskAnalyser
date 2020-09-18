@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 // ReSharper disable LocalizableElement
@@ -11,6 +13,8 @@ namespace DiskAnalyser
         private readonly DiskAnalyser _diskAnalyser;
 
         private readonly BackgroundWorker _backgroundWorker;
+
+        private TreeNode _analysisNode;
 
         public Main()
         {
@@ -30,6 +34,28 @@ namespace DiskAnalyser
             statusLabel.Text = string.Empty;
 
             progressBar.Visible = false;
+
+            foreach (var child in _diskAnalyser.Root.Children)
+            {
+                var newNode = _analysisNode.Nodes.Add(GetDirectoryName(child.Name));
+
+                newNode.Tag = child;
+                newNode.ImageKey = "folder.ico";
+                newNode.SelectedImageKey = "folder.ico";
+
+                if (child.Children.Count > 0)
+                {
+                    var dummyNode = newNode.Nodes.Add("Working...");
+
+                    dummyNode.ImageKey = "Spinner.ico";
+                    dummyNode.SelectedImageKey = "Spinner.ico";
+                }
+            }
+        }
+
+        private string GetDirectoryName(string fullName)
+        {
+            return fullName.Substring(fullName.LastIndexOf('\\') + 1);
         }
 
         private void InitialiseApp()
@@ -62,12 +88,53 @@ namespace DiskAnalyser
 
             progressBar.Visible = true;
 
+            _analysisNode = mainTree.SelectedNode;
+
             _backgroundWorker.RunWorkerAsync(mainTree.SelectedNode.Text);
         }
 
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             _diskAnalyser.Analyse((string) e.Argument);
+        }
+
+        private void mainTree_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var node = e.Node.Tag as FolderInfo;
+
+            if (node == null)
+            {
+                return;
+            }
+
+            e.Node.Nodes.Clear();
+
+            foreach (var folderInfo in node.Children)
+            {
+                var child = e.Node.Nodes.Add(GetDirectoryName(folderInfo.Name));
+
+                child.Tag = folderInfo;
+                child.ImageKey = "folder.ico";
+                child.SelectedImageKey = "folder.ico";
+
+                if (folderInfo.Children.Count > 0)
+                {
+                    var dummyNode = child.Nodes.Add("Working...");
+
+                    dummyNode.ImageKey = "Spinner.ico";
+                    dummyNode.SelectedImageKey = "Spinner.ico";
+                }
+            }
+        }
+
+        private void mainTree_AfterCollapse(object sender, TreeViewEventArgs e)
+        {
+            e.Node.Nodes.Clear();
+
+            var dummyNode = e.Node.Nodes.Add("Working...");
+
+            dummyNode.ImageKey = "Spinner.ico";
+            dummyNode.SelectedImageKey = "Spinner.ico";
         }
     }
 }

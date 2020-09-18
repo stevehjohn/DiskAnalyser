@@ -18,6 +18,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.mainStatus = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.analyseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -28,8 +30,6 @@
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.mainTree = new System.Windows.Forms.TreeView();
             this.treeImages = new System.Windows.Forms.ImageList(this.components);
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.mainStatus.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
@@ -46,6 +46,19 @@
             this.mainStatus.Name = "mainStatus";
             this.mainStatus.Size = new System.Drawing.Size(800, 22);
             this.mainStatus.TabIndex = 0;
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // progressBar
+            // 
+            this.progressBar.AutoSize = false;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.Visible = false;
             // 
             // mainMenu
             // 
@@ -131,6 +144,8 @@
             this.mainTree.ShowLines = false;
             this.mainTree.Size = new System.Drawing.Size(266, 404);
             this.mainTree.TabIndex = 0;
+            this.mainTree.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.mainTree_AfterCollapse);
+            this.mainTree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.mainTree_BeforeExpand);
             // 
             // treeImages
             // 
@@ -138,19 +153,7 @@
             this.treeImages.TransparentColor = System.Drawing.Color.Transparent;
             this.treeImages.Images.SetKeyName(0, "hdd.ico");
             this.treeImages.Images.SetKeyName(1, "folder.ico");
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
-            // progressBar
-            // 
-            this.progressBar.AutoSize = false;
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(150, 16);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar.Visible = false;
+            this.treeImages.Images.SetKeyName(2, "Spinner.ico");
             // 
             // Main
             // 
