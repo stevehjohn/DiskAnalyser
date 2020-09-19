@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 // ReSharper disable LocalizableElement
 
 namespace DiskAnalyser
@@ -25,7 +23,7 @@ namespace DiskAnalyser
             _backgroundWorker = new BackgroundWorker();
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
-            
+
             InitialiseApp();
         }
 
@@ -52,6 +50,17 @@ namespace DiskAnalyser
                     dummyNode.ImageKey = "Spinner.ico";
                     dummyNode.SelectedImageKey = "Spinner.ico";
                 }
+
+                mainFlow.Controls.Add(new ProgressBar
+                                      {
+                                          Minimum = 0,
+                                          Maximum = 1000000,
+                                          Text = "arse", // child.TotalSize.ToString(),
+                                          Value = (int) (1000000 / _diskAnalyser.DriveSize * child.TotalSize),
+                                          Height = 16,
+                                          Padding = new Padding(0, 0, 0, 0),
+                                          Margin = new Padding(1, 1, 1, 1)
+                                      });
             }
         }
 
@@ -102,9 +111,7 @@ namespace DiskAnalyser
 
         private void mainTree_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            var node = e.Node.Tag as FolderInfo;
-
-            if (node == null)
+            if (! (e.Node.Tag is FolderInfo node))
             {
                 return;
             }

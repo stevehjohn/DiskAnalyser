@@ -12,6 +12,8 @@ namespace DiskAnalyser
 
         public List<FolderInfo> Children { get; }
 
+        public FolderInfo Parent { get; set; }
+
         public FolderInfo()
         {
             Children = new List<FolderInfo>();

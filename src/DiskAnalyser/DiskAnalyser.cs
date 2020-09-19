@@ -9,6 +9,8 @@ namespace DiskAnalyser
     {
         public FolderInfo Root { get; private set; }
 
+        public long DriveSize { get; private set; }
+
         public string[] GetDrives()
         {
             return DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).Select(d => d.Name).ToArray();
@@ -17,6 +19,8 @@ namespace DiskAnalyser
         public void Analyse(string drive)
         {
             Root = new FolderInfo { Name = $"\\\\?\\{drive}" };
+
+            DriveSize = DriveInfo.GetDrives().First(di => di.Name == drive).TotalSize;
 
             AnalyseNode(Root);
         }
@@ -38,18 +42,34 @@ namespace DiskAnalyser
 
             try
             {
-                folders = directoryInfo.EnumerateDirectories("*", SearchOption.TopDirectoryOnly);
+                folders = directoryInfo.EnumerateDirectories("*", SearchOption.TopDirectoryOnly).ToList();
             }
             catch (UnauthorizedAccessException)
             {
                 return;
             }
 
+            if (! folders.Any())
+            {
+                var parent = node.Parent;
+
+                while (parent != null)
+                {
+                    parent.TotalSize += node.TotalSize;
+
+                    parent = parent.Parent;
+                }
+            }
+
             foreach (var folder in folders)
             {
                 if ((folder.Attributes & FileAttributes.ReparsePoint) == 0)
                 {
-                    var child = new FolderInfo { Name = folder.FullName };
+                    var child = new FolderInfo
+                                {
+                                    Name = folder.FullName,
+                                    Parent = node
+                                };
 
                     node.Children.Add(child);
 

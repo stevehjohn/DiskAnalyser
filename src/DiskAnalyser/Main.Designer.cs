@@ -30,10 +30,12 @@
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.mainTree = new System.Windows.Forms.TreeView();
             this.treeImages = new System.Windows.Forms.ImageList(this.components);
+            this.mainFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.mainStatus.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
+            this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,6 +131,7 @@
             // mainSplit.Panel2
             // 
             this.mainSplit.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.mainSplit.Panel2.Controls.Add(this.mainFlow);
             this.mainSplit.Size = new System.Drawing.Size(800, 404);
             this.mainSplit.SplitterDistance = 266;
             this.mainSplit.TabIndex = 2;
@@ -156,6 +159,17 @@
             this.treeImages.Images.SetKeyName(1, "folder.ico");
             this.treeImages.Images.SetKeyName(2, "Spinner.ico");
             // 
+            // mainFlow
+            // 
+            this.mainFlow.AutoScroll = true;
+            this.mainFlow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainFlow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.mainFlow.Location = new System.Drawing.Point(0, 0);
+            this.mainFlow.Name = "mainFlow";
+            this.mainFlow.Size = new System.Drawing.Size(530, 404);
+            this.mainFlow.TabIndex = 0;
+            this.mainFlow.WrapContents = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -173,6 +187,7 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.mainSplit.Panel1.ResumeLayout(false);
+            this.mainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -193,5 +208,6 @@
         private System.Windows.Forms.ImageList treeImages;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.FlowLayoutPanel mainFlow;
     }
 }
