@@ -56,10 +56,11 @@ namespace DiskAnalyser
                                           Minimum = 0,
                                           Maximum = 1000000,
                                           Text = "arse", // child.TotalSize.ToString(),
-                                          Value = (int) (1000000 / _diskAnalyser.DriveSize * child.TotalSize),
+                                          Value = (int) (1000000.0d / _diskAnalyser.DriveSize * child.TotalSize),
                                           Height = 16,
                                           Padding = new Padding(0, 0, 0, 0),
-                                          Margin = new Padding(1, 1, 1, 1)
+                                          Margin = new Padding(1, 1, 1, 1),
+                                          Width = 300
                                       });
             }
         }

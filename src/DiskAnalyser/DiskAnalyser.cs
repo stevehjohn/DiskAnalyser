@@ -49,17 +49,21 @@ namespace DiskAnalyser
                 return;
             }
 
-            if (! folders.Any())
-            {
-                var parent = node.Parent;
+            //if (! folders.Any())
+            //{
+            //    var parent = node.Parent;
 
-                while (parent != null)
-                {
-                    parent.TotalSize += node.TotalSize;
+            //    var child = node;
 
-                    parent = parent.Parent;
-                }
-            }
+            //    while (parent != null)
+            //    {
+            //        parent.TotalSize += child.TotalSize;
+
+            //        parent = parent.Parent;
+
+            //        child = parent;
+            //    }
+            //}
 
             foreach (var folder in folders)
             {
